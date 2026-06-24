@@ -1,15 +1,7 @@
-import { auth } from '@/lib/auth'
-import { headers } from 'next/headers'
-import { redirect } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
-export default async function HomePage() {
-  const session = await auth.api.getSession({ headers: await headers() })
-
-  if (session?.user) {
-    redirect('/dashboard')
-  }
+export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-background">
