@@ -1,7 +1,11 @@
 import { betterAuth } from 'better-auth'
 import { pool } from '@/lib/db'
 
-export const auth = betterAuth({
+// Create auth only if pool is available
+let auth: ReturnType<typeof betterAuth> | null = null
+
+if (pool) {
+  auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET,
   database: pool,
   baseURL:
@@ -22,20 +26,23 @@ export const auth = betterAuth({
       ? [`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`]
       : []),
   ],
-  session: {
-    expiresIn: 60 * 60 * 24 * 7, // 7 days
-    updateAge: 60 * 60 * 24, // 1 day
-  },
-  ...(process.env.NODE_ENV === 'development'
-    ? {
-        advanced: {
-          // In dev (v0 preview iframe), force cross-site cookies so the
-          // session cookie is stored by the browser.
-          defaultCookieAttributes: {
-            sameSite: 'none' as const,
-            secure: true,
+    session: {
+      expiresIn: 60 * 60 * 24 * 7, // 7 days
+      updateAge: 60 * 60 * 24, // 1 day
+    },
+    ...(process.env.NODE_ENV === 'development'
+      ? {
+          advanced: {
+            // In dev (v0 preview iframe), force cross-site cookies so the
+            // session cookie is stored by the browser.
+            defaultCookieAttributes: {
+              sameSite: 'none' as const,
+              secure: true,
+            },
           },
-        },
-      }
-    : {}),
-})
+        }
+      : {}),
+  })
+}
+
+export { auth }
