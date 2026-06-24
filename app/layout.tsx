@@ -10,8 +10,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'JobPilot - AI Job Application Automation',
+  description: 'Automatically find and apply to jobs across India and Gulf with AI-powered matching and cover letters',
   generator: 'v0.app',
   icons: {
     icon: [
