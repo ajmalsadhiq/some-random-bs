@@ -7,7 +7,7 @@ const nextConfig = {
     unoptimized: true,
   },
   // Prevent prerendering that requires DATABASE_URL at build time
-  staticPageGenerationTimeout: 0,
+  staticPageGenerationTimeout: 300,
 }
 
 export default nextConfig
