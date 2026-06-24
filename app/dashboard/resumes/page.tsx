@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { uploadResume, getResumes, deleteResume } from '@/app/actions/resumes'
 import { Button } from '@/components/ui/button'
-import { useEffect } from 'react'
 import Link from 'next/link'
 
 const JOB_ROLES = [
