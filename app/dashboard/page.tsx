@@ -7,6 +7,8 @@ import { getTopMatches, getApplications } from '@/app/actions/jobs'
 import JobCard from '@/components/job-card'
 import ApplicationsList from '@/components/applications-list'
 
+export const dynamic = 'force-dynamic'
+
 export default async function DashboardPage() {
   const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user) redirect('/sign-in')
